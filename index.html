@@ -18,7 +18,7 @@
 
     var converter = new showdown.Converter()
 
-    fetch('https://raw.githubusercontent.com/cristiancmello/cristiancmello.github.io/master/articles/index.md').then(function (response) {
+    fetch('./articles/index.md').then(function (response) {
       if (response.ok) {
         response.blob().then(function (myBlob) {
           const reader = new FileReader();
