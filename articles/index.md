@@ -1,8 +1,6 @@
 
-<div class="container">
-  # Articles
+# Articles
 
-  ## Cloud Computing
+## Cloud Computing
 
-  [Cloud Computing](./cloud-computing/index.md)
-</div>
+[Cloud Computing](./cloud-computing/index.md)
