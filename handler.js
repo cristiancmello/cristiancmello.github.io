@@ -1,20 +1,24 @@
 'use strict';
 
-const fs = require('fs')
+const 
+  fs = require('fs'),
+  showdown = require('showdown')
 
 module.exports.loadIndex = async event => {
-  //const indexPageHtml = fs.readFileSync('index.html').toString();
-
   try {
-    const showdown = require('showdown'),
+    const 
       converter = new showdown.Converter(),
-      text = fs.readFileSync(event.path.replace(/^\/|\/$/g, '')).toString(),
+      eventPath = event.path
+      
+    let articlePath = 'articles/' +  eventPath.replace(/^\/|\/$/g, '')
+      
+    if (articlePath === 'articles/') {
+      articlePath = 'articles/index.md'
+    }
+      
+    let
+      text = fs.readFileSync(articlePath).toString(),
       html = converter.makeHtml(text);
-
-    const response = {
-      statusCode: 200,
-      body: { message: 'hello' },
-    };
 
     return {
       statusCode: 200,
@@ -23,16 +27,13 @@ module.exports.loadIndex = async event => {
       },
       body: html
     };
-  }
-  catch (error) {
+  } catch (error) {
     return {
-      statusCode: 200,
-      body: JSON.stringify({
-          message: error
-        },
-        null,
-        2
-      ),
+      statusCode: 400,
+      headers: {
+        'Content-Type': 'text/html',
+      },
+      body: `<h1>Bad Request</h1>`
     };
   }
 };
