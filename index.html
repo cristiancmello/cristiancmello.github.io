@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  <script>
+    showdown.setFlavor('github');
+
+    var converter = new showdown.Converter()
+
+    fetch('flowers.jpg').then(function(response) {
+        if (response.ok) {
+          response.blob().then(function(myBlob) {
+            var objectURL = URL.createObjectURL(myBlob);
+            myImage.src = objectURL;
+          });
+        }
+        else {
+          console.log('Network response was not ok.');
+        }
+      })
+      .catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+      });
+  </script>
+
+  <h1 id="hellomarkdown">hello, markdown!</h1>
+</body>
+
+</html>
